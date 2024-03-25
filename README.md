@@ -5,3 +5,4 @@ Osztály projekt ahol a feladat az volt, hogy
 - 1 országról
 - több várossal
 - fővárosban kezdünk, fővárosban végzünk, közötte bármi
+- bootstrap 4
