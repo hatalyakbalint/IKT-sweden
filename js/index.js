@@ -4,15 +4,17 @@ const blocks = ["1. Stockholm", "2. hellomad", "3. baconking burger", "4. some",
 
 onload = () => {
 	const dots = document.getElementById("dots");
-	for(var i = 0; i < blocks.length; i++)
+	for(let i = 0; i < blocks.length; i++)
 	{
 		const dot = dots.appendChild(document.createElement("div"));
 		dot.style.borderRadius = "100%";
 		dot.style.width = `${size}px`;
 		dot.style.height = `${size}px`;
+		dot.addEventListener("click", () => location.href = `#${i + 1}`);
 
-		const text = dot.appendChild(document.createElement("p"));
+		const text = dot.appendChild(document.createElement("a"));
 		text.innerText = blocks[i];
+		text.href = `#${i + 1}`;
 
 		if(i >= blocks.length - 1) break;
 		const line = dots.appendChild(document.createElement("div"));
@@ -36,9 +38,9 @@ document.addEventListener('scroll', () => {
 	
 });
 
-function myFunction() {
+/*function myFunction() {
 	var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 	var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 	var scrolled = (winScroll / height) * 100;
 	document.getElementById("dots").style.width = scrolled + "%";
-}
+}*/

@@ -26,6 +26,7 @@ header > div > div {
 	margin-bottom: 6.5rem;
 	position: sticky;
 	top: 0px;
+	z-index: 2;
 }
 
 #dots {
@@ -38,13 +39,15 @@ header > div > div {
 #dots > div {
 	margin: auto -1px;
 	background-color: black;
+	cursor: pointer;
 }
 
-#dots > div > p{
+#dots > div > a{
 	transform: rotateZ(-45deg);
 	display: inline-block;
 	margin-top: 40px;
 	margin-left: -20px;
+	color: green;
 }
 
 video{
