@@ -1,6 +1,13 @@
 const size = 50;
 
 const blocks = ["1. Stockholm", "2. hellomad", "3. baconking burger", "4. some", "5. areally long city because why not"];
+const gradients = [];
+
+/*const tressholds = [];
+for(let i = 0.00; i <= 1; i+=0.01)
+{
+	tressholds.push(i);
+}*/
 
 onload = () => {
 	const dots = document.getElementById("dots");
@@ -16,23 +23,25 @@ onload = () => {
 		text.innerText = blocks[i];
 		text.href = `#${i + 1}`;
 
+		gradients.push(dot);
+
+		/*new IntersectionObserver((entries, observer) => {
+			entries.forEach(e2 => {
+				if(e2.isIntersecting)
+				{
+					console.log(e2.intersectionRatio, e2.target);
+				}
+			});
+		}, { threshold: tressholds}).observe(document.getElementById(i + 1));*/
+
 		if(i >= blocks.length - 1) break;
 		const line = dots.appendChild(document.createElement("div"));
 		line.style.width = `${size*3}px`;
 		line.style.height = `${size/4}px`;
+		
+		gradients.push(line);
 	}
 }
-
-/*document.querySelectorAll(".animation").forEach(e => {
-	new IntersectionObserver((entries, observer) => {
-		entries.forEach(e2 => {
-			if(e2.isIntersecting)
-			{
-				
-			}
-		});
-	}).observe(e);
-});*/
 
 document.addEventListener('scroll', () => {
 	

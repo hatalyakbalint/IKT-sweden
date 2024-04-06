@@ -38,11 +38,12 @@ header > div > div {
 
 #dots > div {
 	margin: auto -1px;
+	/*background: linear-gradient(to right, #d7ff00, #d7ff00 47%, #000 47%);*/
 	background-color: black;
 	cursor: pointer;
 }
 
-#dots > div > a{
+#dots > div > a {
 	transform: rotateZ(-45deg);
 	display: inline-block;
 	margin-top: 40px;
@@ -50,9 +51,24 @@ header > div > div {
 	color: green;
 }
 
-video{
+video {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 40%;
+}
+
+.tmp {
+	background-color: yellow;
+}
+
+img {
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 3px;
+	background-color: #ccc;
+}
+
+img + p {
+	text-align: center;
 }
