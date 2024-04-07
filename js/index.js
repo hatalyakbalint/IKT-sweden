@@ -1,6 +1,9 @@
 const size = 50;
 
-const blocks = ["1. Stockholm", "2. hellomad", "3. baconking burger", "4. some", "5. areally long city because why not"];
+const ads = ["ads1.png", "ads2.png"];
+//const blocks = ["1.<br> Stockholm", "2.<br> Örebro", "3.<br> Göteborg", "4.<br> Helsingborg", "5.<br> Koppenhága"];
+const blocks = ["<br>Stockholm", "<br>Örebro", "<br>Göteborg", "<br>Helsingborg", "<br>Koppenhága"];
+//const blocks = ["Stockholm", "Örebro", "Göteborg", "Helsingborg", "Koppenhága"];
 const gradients = [];
 
 /*const tressholds = [];
@@ -9,7 +12,28 @@ for(let i = 0.00; i <= 1; i+=0.01)
 	tressholds.push(i);
 }*/
 
+var popup_template;
+
+function random_int(min, max) { return Math.round(Math.random() * (max - min) + min); }
+
+function make_popup()
+{
+	//window.screenLeft, window.screenTop
+
+	const choice = random_int(0, ads.length - 1);
+	const popup = popup_template.cloneNode(true);
+	popup.querySelector("p").addEventListener("click", () => popup.remove());
+	popup.querySelector("img").src = `img/${ads[choice]}`;
+	popup.hidden = false;
+	popup.id = "";
+	popup.style.top = `${random_int(0, window.innerHeight - 200)}px`;
+	popup.style.left = `${random_int(0, window.innerWidth - 200)}px`;
+	document.body.appendChild(popup);
+}
+
 onload = () => {
+	popup_template = document.getElementById("popup_tmp");
+
 	const dots = document.getElementById("dots");
 	for(let i = 0; i < blocks.length; i++)
 	{
@@ -20,7 +44,7 @@ onload = () => {
 		dot.addEventListener("click", () => location.href = `#${i + 1}`);
 
 		const text = dot.appendChild(document.createElement("a"));
-		text.innerText = blocks[i];
+		text.innerHTML = blocks[i];
 		text.href = `#${i + 1}`;
 
 		gradients.push(dot);
@@ -41,6 +65,26 @@ onload = () => {
 		
 		gradients.push(line);
 	}
+
+	new IntersectionObserver((entries, observer) => {
+		entries.forEach(e2 => {
+			const dots = document.getElementById("dots");
+
+			if(e2.intersectionRatio >= 0.05)
+			{
+				dots.classList.remove("scrolled");
+				return;
+			}
+			else if(e2.intersectionRatio != 0) return;
+
+			dots.classList.add("scrolled");
+		});
+	}, { threshold: [0.0, 0.05, 0.1] }).observe(document.querySelector("header"));
+
+	setTimeout(function run() {
+		make_popup();
+		setTimeout(run, random_int(5000, 7000));
+	}, random_int(1000, 3000));
 }
 
 document.addEventListener('scroll', () => {
