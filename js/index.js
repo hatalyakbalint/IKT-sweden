@@ -45,6 +45,7 @@ function make_popup()
 		let startX = rect.left - e.clientX;
 		let startY = rect.bottom - e.clientY;
 		popup_top.style.cursor = "grabbing";
+		document.body.style.userSelect = "none";
 		
 		document.addEventListener("mousemove", movingmouse);
 
@@ -56,6 +57,7 @@ function make_popup()
 		document.addEventListener("mouseup", () => {
 			document.removeEventListener("mousemove", movingmouse);
 			popup_top.style.cursor = "grab";
+			document.body.style.userSelect = "";
 		})
 	})
 }
