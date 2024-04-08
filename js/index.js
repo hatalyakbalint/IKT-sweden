@@ -1,8 +1,11 @@
 const size = 50;
 
-const ads = ["ads1.png", "ads2.png"];
+const ads = [
+	{ file: "ads1.png", name: "Svéd túra legjobb dolog!!", link: "#" },
+	{ file: "ads2.png", name: "Vedd meg most a jegyed a Svéd túrára!!", link: "#" },
+];
 //const blocks = ["1.<br> Stockholm", "2.<br> Örebro", "3.<br> Göteborg", "4.<br> Helsingborg", "5.<br> Koppenhága"];
-const blocks = ["<br>Stockholm", "<br>Örebro", "<br>Göteborg", "<br>Helsingborg", "<br>Koppenhága"];
+const blocks = ["<br>Vásárlás!", "<br>Stockholm", "<br>Örebro", "<br>Göteborg", "<br>Helsingborg", "<br>Koppenhága"];
 //const blocks = ["Stockholm", "Örebro", "Göteborg", "Helsingborg", "Koppenhága"];
 const gradients = [];
 
@@ -18,17 +21,43 @@ function random_int(min, max) { return Math.round(Math.random() * (max - min) + 
 
 function make_popup()
 {
-	//window.screenLeft, window.screenTop
-
 	const choice = random_int(0, ads.length - 1);
 	const popup = popup_template.cloneNode(true);
-	popup.querySelector("p").addEventListener("click", () => popup.remove());
-	popup.querySelector("img").src = `img/${ads[choice]}`;
+
+	const img = popup.querySelector("img");
+	img.src = `img/${ads[choice].file}`;
+	img.addEventListener("click", () => {
+		if(!window.open(ads[choice].link, "_blank", "popup")) window.open(ads[choice].link, "_blank");
+	});
+
+	popup.querySelector("p[type='close']").addEventListener("click", () => popup.remove());
+	popup.querySelector("span").innerText = ads[choice].name;
+
 	popup.hidden = false;
 	popup.id = "";
 	popup.style.top = `${random_int(0, window.innerHeight - 200)}px`;
 	popup.style.left = `${random_int(0, window.innerWidth - 200)}px`;
 	document.body.appendChild(popup);
+
+	const popup_top = popup.querySelector("div");
+	popup_top.addEventListener("mousedown", (e) => {
+		const rect = popup_top.getBoundingClientRect();
+		let startX = rect.left - e.clientX;
+		let startY = rect.bottom - e.clientY;
+		popup_top.style.cursor = "grabbing";
+		
+		document.addEventListener("mousemove", movingmouse);
+
+		function movingmouse(e) {
+			popup.style.left = e.clientX + startX + "px";
+			popup.style.top = e.clientY + startY + "px";
+		}
+
+		document.addEventListener("mouseup", () => {
+			document.removeEventListener("mousemove", movingmouse);
+			popup_top.style.cursor = "grab";
+		})
+	})
 }
 
 onload = () => {
@@ -85,6 +114,10 @@ onload = () => {
 		make_popup();
 		setTimeout(run, random_int(5000, 7000));
 	}, random_int(1000, 3000));
+
+	document.getElementById("1").querySelector("img").addEventListener("click", () => {
+		location.href = "https://youtu.be/dQw4w9WgXcQ";
+	});
 }
 
 document.addEventListener('scroll', () => {

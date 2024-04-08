@@ -57,6 +57,10 @@ header > div > div {
 	cursor: pointer;
 }
 
+#dots > div:first-child {
+	border: 5px solid gold;
+}
+
 #dots > div > a {
 	transform: rotateZ(-45deg);
 	display: inline-block;
@@ -75,6 +79,25 @@ header > div > div {
 	display: block;
 	margin-top: inherit;
 	margin-left: inherit;
+}
+
+section:first-of-type p {
+	margin-bottom: 0.3rem;
+}
+
+section:first-of-type img{
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	box-shadow: 6px 25px 19px -12px rgba(0,0,0,1);
+	border-radius: 30%;
+	background-color: transparent;
+	margin-bottom: 1rem;
+}
+
+section:first-of-type img:active{
+	box-shadow: 6px 20px 19px -12px rgba(0,0,0,1);
+	translate: 0 5px;
 }
 
 iframe {
@@ -140,23 +163,40 @@ h3 > span {
 	position: fixed;
 }
 
+.popup > div {
+	display: inline-block;
+	position: absolute;
+	height: 2rem;
+	width: 100%;
+	top: -1.5rem;
+	background-color: rgb(176, 175, 175);
+	z-index: 1000;
+	color: white;
+	padding-left: 5px;
+	cursor: grab;
+}
+
 .popup img {
 	display: inline;
-	border: 5px solid rgb(158, 156, 156);
+	border: 5px solid rgb(176, 175, 175);
 	border-radius: 0;
 	padding: 0;
 	position: relative;
 	top: 0;
+	user-select: none;
+	cursor: pointer;
 }
 
 .popup p {
 	display: inline-block;
 	position: absolute;
 	right: 5px;
-	top: 5px;
+	top: -1.25rem;
 	color: black;
 	background-color: lightcoral;
 	border-radius: 100%;
 	padding: 0px 0.5rem;
 	cursor: pointer;
+	z-index: 1001;
+	user-select: none;
 }
